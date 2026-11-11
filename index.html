@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090912">
+  <meta name="description" content="Portafolio personal de Jimpact A.">
+  <title>Jimpact A. | Portafolio personal</title>
+  <style>
+    :root {
+      --bg: #090912;
+      --surface: #11101d;
+      --surface-2: #171426;
+      --purple: #9857ff;
+      --purple-light: #c3a0ff;
+      --text: #f5f2ff;
+      --muted: #b9b2ca;
+      --border: rgba(174, 128, 255, .2);
+      --glow: 0 0 28px rgba(145, 75, 255, .22);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 80% 8%, rgba(105, 48, 180, .16), transparent 34rem),
+        radial-gradient(ellipse at 5% 55%, rgba(80, 45, 150, .10), transparent 28rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(9, 9, 18, .86);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+    }
+    .nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.03em; }
+    .brand-mark {
+      width: 38px; height: 38px; display: grid; place-items: center;
+      color: white; font-size: 21px; font-weight: 900;
+      background: linear-gradient(145deg, #bd8aff, #7134d8);
+      clip-path: polygon(50% 0, 100% 100%, 72% 100%, 50% 48%, 28% 100%, 0 100%);
+      filter: drop-shadow(0 0 12px rgba(152,87,255,.5));
+    }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a { color: var(--muted); padding: 9px 13px; border-radius: 999px; font-size: .93rem; transition: .2s; }
+    .nav-links a:hover, .nav-links a.active { color: white; background: rgba(152,87,255,.14); box-shadow: inset 0 0 0 1px var(--border); }
+    .menu-toggle { display: none; border: 1px solid var(--border); color: white; background: var(--surface); border-radius: 10px; padding: 8px 11px; cursor: pointer; }
+    .hero { min-height: 570px; display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 28px; padding-block: 68px; overflow: hidden; }
+    .eyebrow { color: var(--purple-light); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: .78rem; }
+    h1 { margin: 12px 0 8px; font-size: clamp(3rem, 7vw, 5.8rem); line-height: .98; letter-spacing: -.065em; }
+    .gradient-text { color: var(--purple); background: linear-gradient(100deg, #c5a2ff, #8545f5); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-role { color: var(--purple-light); font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 650; margin: 20px 0; }
+    .hero-copy { max-width: 520px; color: var(--muted); font-size: 1.05rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 28px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border-radius: 12px; padding: 12px 19px; font-weight: 700; border: 1px solid var(--purple); transition: transform .2s, box-shadow .2s, background .2s; cursor: pointer; }
+    .btn:hover { transform: translateY(-3px); box-shadow: var(--glow); }
+    .btn-primary { color: white; background: linear-gradient(110deg, #a66aff, #7135d5); border: 0; }
+    .btn-outline { color: var(--text); background: transparent; }
+    .hero-art { min-height: 400px; position: relative; display: grid; place-items: center; }
+    .orb { position: absolute; width: min(390px, 90%); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #d8c0ff, #8b4be5 32%, #2b174b 65%, transparent 70%); opacity: .8; filter: blur(1px); box-shadow: 0 0 90px rgba(143,78,255,.3); }
+    .avatar-placeholder { position: relative; width: min(330px, 78%); aspect-ratio: .82; display: grid; place-items: center; text-align: center; padding: 28px; border: 1px solid rgba(207,178,255,.35); border-radius: 48% 48% 24px 24px; background: linear-gradient(150deg, rgba(45,31,73,.78), rgba(13,12,25,.9)); box-shadow: var(--glow); overflow: hidden; }
+    .avatar-placeholder::before, .avatar-placeholder::after { content: ""; position: absolute; width: 180%; height: 1px; background: linear-gradient(90deg, transparent, var(--purple), transparent); transform: rotate(-35deg); }
+    .avatar-placeholder::before { top: 28%; } .avatar-placeholder::after { bottom: 22%; }
+    .avatar-symbol { font-size: 6rem; filter: drop-shadow(0 0 25px rgba(180,130,255,.6)); }
+    .avatar-placeholder small { color: var(--muted); max-width: 190px; }
+    section { padding: 78px 0; border-top: 1px solid rgba(174,128,255,.12); }
+    .section-heading { margin-bottom: 30px; }
+    .section-heading h2 { margin: 0; font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -.04em; }
+    .section-heading h2::before { content: ""; display: inline-block; width: 7px; height: 30px; margin-right: 14px; vertical-align: -3px; border-radius: 8px; background: var(--purple); box-shadow: 0 0 18px var(--purple); }
+    .section-heading p { margin: 7px 0 0 22px; color: var(--muted); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 42px; }
+    .about-copy { color: var(--muted); }
+    .about-copy p { margin-top: 0; }
+    .about-visual { min-height: 260px; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(135deg, rgba(118,64,197,.24), rgba(20,17,34,.9)), radial-gradient(circle at 75% 30%, rgba(187,145,255,.35), transparent 35%); display: grid; place-items: center; overflow: hidden; box-shadow: var(--glow); }
+    .about-visual span { font-size: 5rem; opacity: .85; }
+    .skills-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .skill-card, .project-card, .contact-card { background: linear-gradient(145deg, rgba(25,22,41,.95), rgba(14,13,24,.95)); border: 1px solid var(--border); border-radius: 15px; }
+    .skill-card { padding: 22px 15px; text-align: center; transition: .2s; }
+    .skill-card:hover, .project-card:hover { transform: translateY(-5px); border-color: rgba(174,128,255,.55); box-shadow: var(--glow); }
+    .skill-icon { color: var(--purple-light); font-size: 2rem; display: block; margin-bottom: 8px; }
+    .skill-card h3 { font-size: 1rem; margin: 0 0 5px; }
+    .skill-card p { color: var(--muted); font-size: .86rem; margin: 0; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { overflow: hidden; transition: .2s; }
+    .project-cover { min-height: 155px; display: grid; place-items: center; font-size: 3.4rem; color: #d6bdff; background: radial-gradient(circle at 50% 20%, rgba(155,93,255,.45), transparent 55%), linear-gradient(135deg, #21153c, #10101c); }
+    .project-content { padding: 18px; }
+    .project-content h3 { margin: 0 0 6px; }
+    .project-content p { color: var(--muted); font-size: .92rem; margin: 0 0 13px; }
+    .project-link { color: var(--purple-light); font-size: .9rem; font-weight: 700; }
+    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 25px; }
+    .contact-info { color: var(--muted); }
+    .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .socials a { border: 1px solid var(--border); border-radius: 10px; padding: 9px 13px; color: var(--purple-light); }
+    .contact-card { padding: 24px; }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; margin-bottom: 6px; color: var(--muted); font-size: .9rem; }
+    .field input, .field textarea { width: 100%; color: var(--text); background: #0d0c17; border: 1px solid var(--border); border-radius: 10px; padding: 12px 13px; outline: none; }
+    .field input:focus, .field textarea:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(152,87,255,.12); }
+    .field textarea { min-height: 125px; resize: vertical; }
+    .form-note { color: var(--muted); font-size: .8rem; margin: 12px 0 0; }
+    footer { border-top: 1px solid var(--border); padding: 24px 0; color: var(--muted); font-size: .9rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .back-top { color: var(--purple-light); }
+    @media (max-width: 850px) {
+      .skills-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero { min-height: auto; }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 30px, 520px); }
+      .nav { min-height: 64px; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; padding: 12px 18px 18px; background: rgba(9,9,18,.98); border-bottom: 1px solid var(--border); flex-direction: column; align-items: stretch; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px; }
+      .hero { grid-template-columns: 1fr; padding-block: 58px 40px; gap: 10px; }
+      .hero-art { min-height: 300px; }
+      .avatar-placeholder { width: 245px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header" id="inicio">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-mark">A</span><span>Jimpact A.</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menú</button>
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+        <a class="active" href="#inicio">⌂ Inicio</a>
+        <a href="#sobre-mi">♟ Sobre mí</a>
+        <a href="#habilidades">⌘ Habilidades</a>
+        <a href="#proyectos">▣ Proyectos</a>
+        <a href="#contacto">✉ Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container hero">
+      <div>
+        <span class="eyebrow">Portafolio personal</span>
+        <h1>Hola, soy<br><span class="gradient-text">Jimpact A.</span></h1>
+        <p class="hero-role">Desarrollador · Gamer · Fan del anime</p>
+        <p class="hero-copy">Bienvenido a mi espacio personal. Aquí encontrarás un poco sobre mí, mis habilidades y algunos de los proyectos en los que trabajo.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#sobre-mi">♟ Conóceme</a>
+          <a class="btn btn-outline" href="#proyectos">▣ Ver proyectos</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Espacio para una ilustración personal">
+        <div class="orb"></div>
+        <div class="avatar-placeholder">
+          <div>
+            <div class="avatar-symbol">✦</div>
+            <small>Coloca aquí tu ilustración o avatar</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="sobre-mi">
+      <div class="container about-grid">
+        <div>
+          <div class="section-heading"><h2>Sobre mí</h2><p>Un poco de mi historia</p></div>
+          <div class="about-copy">
+            <p>Soy una persona apasionada por la tecnología, los videojuegos y el anime. Me gusta aprender cosas nuevas, desarrollar proyectos y explorar ideas creativas.</p>
+            <p>Siempre busco mejorar, experimentar con nuevas herramientas y convertir mis ideas en proyectos reales.</p>
+            <a class="btn btn-outline" href="#contacto">Hablemos <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="about-visual" aria-label="Imagen decorativa"><span>☾ ✧</span></div>
+      </div>
+    </section>
+
+    <section id="habilidades">
+      <div class="container">
+        <div class="section-heading"><h2>Habilidades</h2><p>Áreas que me interesan y tecnologías que estoy explorando</p></div>
+        <div class="skills-grid">
+          <article class="skill-card"><span class="skill-icon">⌘</span><h3>Programación</h3><p>JavaScript, TypeScript y Python.</p></article>
+          <article class="skill-card"><span class="skill-icon">◎</span><h3>Desarrollo web</h3><p>HTML, CSS, React y NestJS.</p></article>
+          <article class="skill-card"><span class="skill-icon">✧</span><h3>Diseño UI</h3><p>Interfaces modernas y atractivas.</p></article>
+          <article class="skill-card"><span class="skill-icon">🎮</span><h3>Videojuegos</h3><p>Estrategia, análisis y creatividad.</p></article>
+          <article class="skill-card"><span class="skill-icon">★</span><h3>Aprendizaje</h3><p>Curiosidad y mejora continua.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <div class="container">
+        <div class="section-heading"><h2>Proyectos</h2><p>Una selección de trabajos y experimentos personales</p></div>
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-cover">⌨</div>
+            <div class="project-content"><h3>Portafolio personal</h3><p>Mi espacio web para presentar quién soy y lo que hago.</p><a class="project-link" href="#contacto">Ver proyecto ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-cover">🎮</div>
+            <div class="project-content"><h3>GameHub</h3><p>Concepto de plataforma para descubrir videojuegos.</p><a class="project-link" href="#contacto">Ver proyecto ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-cover">🌸</div>
+            <div class="project-content"><h3>Anime Gallery</h3><p>Galería conceptual dedicada al arte y la ilustración.</p><a class="project-link" href="#contacto">Ver proyecto ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="section-heading"><h2>Contacto</h2><p>¿Tienes una pregunta, propuesta o simplemente quieres saludar?</p></div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p>Estoy abierto a conversar sobre proyectos, tecnología, videojuegos e ideas creativas. Puedes encontrarme en estos espacios:</p>
+            <div class="socials">
+              <a href="mailto:tu-correo@ejemplo.com">Correo</a>
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://discord.com/" target="_blank" rel="noopener noreferrer">Discord</a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+          </div>
+          <form class="contact-card" id="contactForm">
+            <div class="field"><label for="name">Tu nombre</label><input id="name" name="name" type="text" placeholder="¿Cómo te llamas?" required></div>
+            <div class="field"><label for="email">Tu correo electrónico</label><input id="email" name="email" type="email" placeholder="correo@ejemplo.com" required></div>
+            <div class="field"><label for="message">Tu mensaje</label><textarea id="message" name="message" placeholder="Escribe tu mensaje..." required></textarea></div>
+            <button class="btn btn-primary" type="submit">➤ Preparar mensaje</button>
+            <p class="form-note" id="formNote">El formulario abrirá tu aplicación de correo. Cambia el correo de destino en el código antes de publicarlo.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Jimpact A. Todos los derechos reservados.</span>
+      <a class="back-top" href="#inicio">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('contactForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const name = form.elements.name.value.trim();
+      const email = form.elements.email.value.trim();
+      const message = form.elements.message.value.trim();
+      const destination = 'tu-correo@ejemplo.com'; // Reemplaza con tu correo real.
+      const subject = encodeURIComponent('Mensaje desde mi página personal');
+      const body = encodeURIComponent(`Nombre: ${name}\nCorreo: ${email}\n\n${message}`);
+      window.location.href = `mailto:${destination}?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
